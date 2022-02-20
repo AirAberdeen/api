@@ -16,6 +16,21 @@ You will be able to:
 * Latitude and Longatude input type  e.g. 57.22  or -2.77
 """
 
+tags_metadata = [
+    {
+        "name": "device",
+        "description": "a air quality device ",
+    },
+    {
+        "name": "sensor",
+        "description": "a sensor located within a device",
+        "externalDocs": {
+            "description": "Learn about sensors",
+            "url": "https://sensor.community/en/sensors/airrohr/",
+        },
+    },
+]
+
 app = FastAPI(
     title="AirAberdeenAPI",
     description=description,
@@ -30,6 +45,7 @@ app = FastAPI(
         "name": "GNU 3.0",
         "url": "https://github.com/AirAberdeen/api/blob/main/LICENSE",
     },
+    openapi_tags=tags_metadata,
 )
 
 @app.get("/")
@@ -37,7 +53,7 @@ async def root():
     return {"message": "Hello AIR ABERDEEN"}
 
 
-@app.get("/devices/location/lat/{lat}/lon/{lon}")
+@app.get("/devices/location/lat/{lat}/lon/{lon}", tags=["device"])
 async def read_item(lat: float,lon: float):
     return {"devices_id": [lat, lon, 1, 2, 3]}
 
