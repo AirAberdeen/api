@@ -29,6 +29,14 @@ tags_metadata = [
             "url": "https://sensor.community/en/sensors/airrohr/",
         },
     },
+    {
+        "name": "area",
+        "description": "a reactange form by four latitude and longitute",
+        "externalDocs": {
+            "description": "Tools to help collect lat long lat long",
+            "url": "https://geojson.io/",
+        },
+    },
 ]
 
 app = FastAPI(
@@ -58,7 +66,7 @@ async def read_item(lat: float,lon: float):
     return {"devices_id": [lat, lon, 1, 2, 3]}
 
 
-@app.get("/devices/area/{lat}/{lon}/{distance}")
+@app.get("/devices/area/{lat}/{lon}/{distance}", tags=["area"])
 async def read_item(lat: float, lon: float, distance: int):
     return {"devices_id": [lat, lon, distance, 1, 2, 3, 4, 5, 6]}
 
@@ -73,7 +81,7 @@ async def read_item(device_id):
     return {"device_id": [device_id, 1, 2, 3, 4]}
 
 
-@app.get("/device/{device_id}/sensor/{sensor_id}")
+@app.get("/device/{device_id}/sensor/{sensor_id}", tags=["sensor"])
 async def read_item(device_id, sensor_id):
     return {"sensor_id": [device_id, sensor_id, 1, 2, 3, 5]}
 
