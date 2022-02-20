@@ -1,7 +1,36 @@
 from fastapi import FastAPI
 
-app = FastAPI()
+description = """
+access data in JSON format from air quality devices in Aberdeen and Aberdeenshire.
 
+## Device
+get JSON data **per single device location**.
+contains sensor id per device
+
+## Query by location
+
+You will be able to:
+* **Specific location** (_not implemented_).
+* **Location and distance from** (_not implemented_).
+* **A rectangle area** (_not implemented_).
+* Latitude and Longatude input type  e.g. 57.22  or -2.77
+"""
+
+app = FastAPI(
+    title="AirAberdeenAPI",
+    description=description,
+    version="0.0.1",
+    terms_of_service="https://airaberdeen.org/terms/",
+    contact={
+        "name": "airaberdeen",
+        "url": "https://airaberdeen.org",
+        "email": "api@airaberdeen.org",
+    },
+    license_info={
+        "name": "GNU 3.0",
+        "url": "https://github.com/AirAberdeen/api/blob/main/LICENSE",
+    },
+)
 
 @app.get("/")
 async def root():
